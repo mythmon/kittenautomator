@@ -13,4 +13,4 @@ You can either paste this into Firefox's scratch pad, or install it with
 [Greasemonkey][] by [clicking here][install].
 
 [Greasemonkey]: https://greasespot.net
-[install]: https://raw.githubusercontent.com/mythmon/kittenautomator/master/kittenautomator.js
+[install]: https://raw.githubusercontent.com/mythmon/kittenautomator/master/kittenautomator.user.js
