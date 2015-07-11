@@ -17,12 +17,12 @@ const dumpThreshholds = {
 }
 
 const workshopInstructions = [
-  {from: "catnip",      to: "wood",         amount: 30},
-  {from: "wood",        to: "beam" ,        amount: 1},
-  {from: "minerals",    to: "slab" ,        amount: 1},
-  {from: "coal",        to: "steel",        amount: 1},
-  {from: "iron",        to: "plate",        amount: 1},
-  {from: "titanium",    to: "alloy",        amount: 1},
+  {from: "catnip", to: "wood", amount: 30},
+  {from: "wood", to: "beam" , amount: 1},
+  {from: "minerals", to: "slab" , amount: 1},
+  {from: "coal", to: "steel", amount: 1},
+  {from: "iron", to: "plate", amount: 1},
+  {from: "titanium", to: "alloy", amount: 1},
 ];
 
 function tick() {
