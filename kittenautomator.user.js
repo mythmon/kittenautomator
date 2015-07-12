@@ -10,6 +10,12 @@
 
 const tickRate = 10;
 
+// Percentages at which extra resource should be used
+const dumpThreshholds = {
+  "culture": .95,
+  "science": .95,
+}
+
 const workshopInstructions = [
   {from: "catnip", to: "wood", amount: 30},
   {from: "wood", to: "beam" , amount: 1},
@@ -23,8 +29,27 @@ function tick() {
   tickWorkshop();
   tickHunt();
   tickStars();
+  tickBooks();
 }
-  
+
+function tickBooks() {
+  var culture = gamePage.resPool.get('culture');
+  var science = gamePage.resPool.get('science');
+  if (culture.value / culture.maxValue > dumpThreshholds.culture) {
+    if (gamePage.workshop.getCraft('manuscript').unlocked &&
+        gamePage.resPool.get('parchment').value >= 25) {
+      gamePage.craft('manuscript', 1);
+    }
+  }
+  if (science.value / science.maxValue > dumpThreshholds.science) {
+    if (gamePage.workshop.getCraft('manuscript').unlocked &&
+        gamePage.resPool.get('manuscript').value >= 50) {
+      // Yes, "compendium" is misspelled in the source.
+      gamePage.craft('compedium', 1);
+    }
+  }
+}
+
 function tickWorkshop() {
   for (var i = 0; i < workshopInstructions.length; i++) {
     const fromRes = gamePage.resPool.get(workshopInstructions[i].from);
@@ -45,10 +70,7 @@ function tickHunt() {
   if (catpower.value / catpower.maxValue > 0.95) {
     $("a:contains('Send hunters')").click();
     if (gamePage.workshop.getCraft('parchment').unlocked)  {
-      gamePage.craftAll('parchment'); 
-    }
-    if (gamePage.workshop.getCraft('manuscript').unlocked) {
-      gamePage.craftAll('manuscript');
+      gamePage.craftAll('parchment');
     }
   }
 }
