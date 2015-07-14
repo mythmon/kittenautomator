@@ -6,6 +6,21 @@ with an eye towards making the game more idle-friendly.
 
 [kittens]: http://bloodrizer.ru/games/kittens/
 
+Features
+--------
+
+* Automatically observers stars.
+* Spends resources when they approach their maximum capacity.
+  * Catnip to wood
+  * Wood to beams
+  * Minerals to slabs
+  * Coal to steel
+  * Iron to plate
+  * Titanium to alloy
+  * Culture to manuscripts
+  * Science to compendiums
+* Automatically sends hunters when approaching max catpower.
+
 Installation
 ------------
 
