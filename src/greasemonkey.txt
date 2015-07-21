@@ -1,0 +1,9 @@
+// ==UserScript==
+// @name        Kitten Automator
+// @namespace   http://mythmon.com/greasemonkey
+// @description Automates some of the Kittens Game
+// @include     http://bloodrizer.ru/games/kittens/
+// @include     http://bloodrizer.ru/games/kittens/#
+// @version     2
+// @grant       none
+// ==/UserScript==

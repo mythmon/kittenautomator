@@ -1,0 +1,26 @@
+{
+  "name": "kittenautomator",
+  "description": "A Greasemonkey script for Kittens game.",
+  "main": "kittenautomator.user.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mythmon/kittenautomator.git"
+  },
+  "keywords": [
+    "greasemonkey",
+    "kittens"
+  ],
+  "author": "Mike Cooper <mythmon@elem.us>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mythmon/kittenautomator/issues"
+  },
+  "homepage": "https://github.com/mythmon/kittenautomator#readme",
+  "devDependencies": {
+    "babel-core": "^5.7.4",
+    "babel-loader": "^5.3.2",
+    "eslint": "^0.24.1",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1"
+  }
+}
