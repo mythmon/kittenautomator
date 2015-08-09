@@ -21,7 +21,7 @@ export default class Options extends ControllerComponent {
   render() {
     return (
       <div>
-        <h3>Kitten Automator</h3>
+        <h3>Automator</h3>
         <div>
           {this.state.conversions.map(conv => {
             return (<div key={`conversion-${conv.get('from')}-${conv.get('to')}`}>
