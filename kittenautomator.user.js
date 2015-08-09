@@ -6,6 +6,7 @@
 // @include     http://bloodrizer.ru/games/kittens/#
 // @version     4
 // @grant       none
+// @downloadURL https://raw.githubusercontent.com/mythmon/kittenautomator/master/kittenautomator.user.js
 // ==/UserScript==
 
 /******/ (function(modules) { // webpackBootstrap
