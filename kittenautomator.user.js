@@ -4,7 +4,7 @@
 // @description Automates some of the Kittens Game
 // @include     http://bloodrizer.ru/games/kittens/
 // @include     http://bloodrizer.ru/games/kittens/#
-// @version     5
+// @version     7
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/mythmon/kittenautomator/master/kittenautomator.user.js
 // ==/UserScript==
@@ -26230,12 +26230,12 @@
 	  _createClass(BaseStore, [{
 	    key: 'addChangeListener',
 	    value: function addChangeListener(cb) {
-	      this.on('change', cb);
+	      this.addListener('change', cb);
 	    }
 	  }, {
 	    key: 'removeChangeListener',
 	    value: function removeChangeListener(cb) {
-	      this.off('change', cb);
+	      this.removeListener('change', cb);
 	    }
 	  }, {
 	    key: 'emitChange',

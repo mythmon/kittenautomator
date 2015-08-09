@@ -2,11 +2,11 @@ import {EventEmitter} from 'events';
 
 export default class BaseStore extends EventEmitter {
   addChangeListener(cb) {
-    this.on('change', cb);
+    this.addListener('change', cb);
   }
 
   removeChangeListener(cb) {
-    this.off('change', cb);
+    this.removeListener('change', cb);
   }
 
   emitChange() {
