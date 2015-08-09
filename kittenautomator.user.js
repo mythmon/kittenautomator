@@ -62,7 +62,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* globals gamePage:false, $:false */
+	/* globals $:false */
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -82,6 +82,10 @@
 	var _storesConfigStoreJs = __webpack_require__(161);
 
 	var _storesConfigStoreJs2 = _interopRequireDefault(_storesConfigStoreJs);
+
+	var _gamePageJs = __webpack_require__(172);
+
+	var _gamePageJs2 = _interopRequireDefault(_gamePageJs);
 
 	var tickRate = 10;
 
@@ -114,17 +118,17 @@
 	}
 
 	function tickBooks() {
-	  var culture = gamePage.resPool.get('culture');
-	  var science = gamePage.resPool.get('science');
+	  var culture = (0, _gamePageJs2['default'])().resPool.get('culture');
+	  var science = (0, _gamePageJs2['default'])().resPool.get('science');
 	  if (culture.value / culture.maxValue > dumpThreshholds.culture) {
-	    if (gamePage.workshop.getCraft('manuscript').unlocked && gamePage.resPool.get('parchment').value >= 25) {
-	      gamePage.craft('manuscript', 1);
+	    if ((0, _gamePageJs2['default'])().workshop.getCraft('manuscript').unlocked && (0, _gamePageJs2['default'])().resPool.get('parchment').value >= 25) {
+	      (0, _gamePageJs2['default'])().craft('manuscript', 1);
 	    }
 	  }
 	  if (science.value / science.maxValue > dumpThreshholds.science) {
-	    if (gamePage.workshop.getCraft('manuscript').unlocked && gamePage.resPool.get('manuscript').value >= 50) {
+	    if ((0, _gamePageJs2['default'])().workshop.getCraft('manuscript').unlocked && (0, _gamePageJs2['default'])().resPool.get('manuscript').value >= 50) {
 	      // Yes, "compendium" is misspelled in the source.
-	      gamePage.craft('compedium', 1);
+	      (0, _gamePageJs2['default'])().craft('compedium', 1);
 	    }
 	  }
 	}
@@ -142,21 +146,21 @@
 	        continue;
 	      }
 
-	      var fromRes = gamePage.resPool.get(conv.get('from'));
+	      var fromRes = (0, _gamePageJs2['default'])().resPool.get(conv.get('from'));
 
 	      var toGo = fromRes.maxValue - fromRes.value;
 	      var ratePerTick = fromRes.perTickUI * tickRate;
-	      var enabled = gamePage.workshop.getCraft(conv.get('to')).unlocked;
+	      var enabled = (0, _gamePageJs2['default'])().workshop.getCraft(conv.get('to')).unlocked;
 
 	      var enoughIngredients = true;
 	      conv.get('ingredients').forEach(function (amount, name) {
-	        if (gamePage.resPool.get(name).value < amount) {
+	        if ((0, _gamePageJs2['default'])().resPool.get(name).value < amount) {
 	          enoughIngredients = false;
 	        }
 	      });
 
 	      if (enoughIngredients && toGo <= ratePerTick * 2 && enabled) {
-	        gamePage.craft(conv.get('to'), 1);
+	        (0, _gamePageJs2['default'])().craft(conv.get('to'), 1);
 	      }
 	    }
 	  } catch (err) {
@@ -176,11 +180,11 @@
 	}
 
 	function tickHunt() {
-	  var catpower = gamePage.resPool.get('manpower');
+	  var catpower = (0, _gamePageJs2['default'])().resPool.get('manpower');
 	  if (catpower.value / catpower.maxValue > 0.95) {
 	    $('a:contains(\'Send hunters\')').click();
-	    if (gamePage.workshop.getCraft('parchment').unlocked) {
-	      gamePage.craftAll('parchment');
+	    if ((0, _gamePageJs2['default'])().workshop.getCraft('parchment').unlocked) {
+	      (0, _gamePageJs2['default'])().craftAll('parchment');
 	    }
 	  }
 	}
@@ -191,14 +195,14 @@
 
 	function makeUi() {
 	  var tab = new _OptionsTabJs2['default']();
-	  gamePage.addTab(tab);
-	  gamePage.render();
+	  (0, _gamePageJs2['default'])().addTab(tab);
+	  (0, _gamePageJs2['default'])().render();
 	}
 
 	console.log('%cSetting up Kitten Automator...', 'color: #12e');
-	makeUi();
 	setTimeout(function () {
-	  gamePage.timer.addEvent(tick, tickRate); // Every two seconds
+	  (0, _gamePageJs2['default'])().timer.addEvent(tick, tickRate); // Every two seconds
+	  makeUi();
 	  console.log('%cKitten Automator active.', 'color: #12e');
 	}, 3000);
 
@@ -26665,6 +26669,25 @@
 	  toggleConversion: toggleConversion
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 172 */
+/***/ function(module, exports) {
+
+	/* global unsafeWindow:false */
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = gamePage;
+
+	function gamePage() {
+	  return unsafeWindow.gamePage;
+	}
+
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);
