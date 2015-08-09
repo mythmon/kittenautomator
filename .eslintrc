@@ -33,6 +33,7 @@ rules:
   no-underscore-dangle: [0]
   no-use-before-define: [2, nofunc]
   camelcase: [0]
+  no-loop-func: [0]
 
 env:
   es6: true

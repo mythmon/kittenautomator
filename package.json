@@ -22,5 +22,11 @@
     "eslint": "^0.24.1",
     "node-libs-browser": "^0.5.2",
     "webpack": "^1.10.1"
+  },
+  "dependencies": {
+    "events": "^1.0.2",
+    "flux": "^2.0.3",
+    "immutable": "^3.7.4",
+    "react": "^0.13.3"
   }
 }

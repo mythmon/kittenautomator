@@ -1,5 +1,8 @@
-
 /* globals gamePage:false, $:false */
+import React from 'react';
+import OptionsTab from './OptionsTab.js';
+import ConfigActions from './actions/ConfigActions.js';
+import ConfigStore from './stores/ConfigStore.js';
 
 const tickRate = 10;
 
@@ -9,14 +12,21 @@ const dumpThreshholds = {
   'science': .95,
 };
 
-const workshopInstructions = [
-  {from: 'catnip', to: 'wood', amount: 30},
-  {from: 'wood', to: 'beam', amount: 1},
-  {from: 'minerals', to: 'slab', amount: 1},
-  {from: 'coal', to: 'steel', amount: 1},
-  {from: 'iron', to: 'plate', amount: 1},
-  {from: 'titanium', to: 'alloy', amount: 1},
-];
+
+ConfigActions.addConversion('catnip', 'wood');
+ConfigActions.addConversion('wood', 'beam');
+ConfigActions.addConversion('minerals', 'slab');
+ConfigActions.addConversion('coal', 'steel');
+ConfigActions.addConversion('iron', 'plate');
+ConfigActions.addConversion('titanium', 'alloy');
+ConfigActions.addConversion('culture', 'manuscript', {
+  parchment: 25,
+  science: 10000,
+});
+ConfigActions.addConversion('science', 'compedium', { // yes, this is mispelled
+  manuscript: 50,
+  culture: 400,
+});
 
 function tick() {
   tickWorkshop();
@@ -45,15 +55,26 @@ function tickBooks() {
 
 
 function tickWorkshop() {
-  for (var i = 0; i < workshopInstructions.length; i++) {
-    const fromRes = gamePage.resPool.get(workshopInstructions[i].from);
+  for (let conv of ConfigStore.getConversions()) {
+    if (!conv.get('active')) {
+      continue;
+    }
+
+    const fromRes = gamePage.resPool.get(conv.get('from'));
 
     const toGo = fromRes.maxValue - fromRes.value;
     const ratePerTick = fromRes.perTickUI * tickRate;
-    const enabled = gamePage.workshop.getCraft(workshopInstructions[i].to).unlocked;
+    const enabled = gamePage.workshop.getCraft(conv.get('to')).unlocked;
 
-    if (toGo <= ratePerTick * 2 && enabled) {
-      gamePage.craft(workshopInstructions[i].to, workshopInstructions[i].amount);
+    let enoughIngredients = true;
+    conv.get('ingredients').forEach((amount, name) => {
+      if (gamePage.resPool.get(name).value < amount) {
+        enoughIngredients = false;
+      }
+    });
+
+    if (enoughIngredients && toGo <= ratePerTick * 2 && enabled) {
+      gamePage.craft(conv.get('to'), 1);
     }
   }
 }
@@ -72,8 +93,15 @@ function tickStars() {
   $('#gameLog input').click();
 }
 
+function makeUi() {
+  let tab = new OptionsTab();
+  gamePage.addTab(tab);
+  gamePage.render();
+}
+
 console.log('%cSetting up Kitten Automator...', 'color: #12e');
+makeUi();
 setTimeout(() => {
   gamePage.timer.addEvent(tick, tickRate); // Every two seconds
-console.log('%cKitten Automator active.', 'color: #12e');
+  console.log('%cKitten Automator active.', 'color: #12e');
 }, 3000);
